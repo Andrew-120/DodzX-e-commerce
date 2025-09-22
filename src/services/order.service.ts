@@ -114,7 +114,7 @@ export async function getUserOrders() {
     return {
       data: null,
       success: false,
-      message: "Something went wrong while fetching orders",
+      message: (error as string) || "Something went wrong while fetching orders",
     };
   }
 }
