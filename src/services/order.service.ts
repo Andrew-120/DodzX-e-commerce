@@ -8,7 +8,7 @@ import {
 export async function handlePayment(
   formState: addressFormStateType,
   formData: FormData
-) : Promise<addressFormStateType> {
+): Promise<addressFormStateType> {
   const shippingAddress = {
     details: formData.get("details"),
     phone: formData.get("phone"),
@@ -30,7 +30,6 @@ export async function handlePayment(
       error: parsedData.error?.flatten().fieldErrors,
       message: null,
       callbackUrl: "/cart",
-      
     };
   }
 
@@ -66,9 +65,7 @@ export async function handlePayment(
       success: true,
       error: {},
       message: data.message || "Order placed successfully",
-      callbackUrl:
-        paymentMethod === "cash" ? "/allorders" : data.session?.url,
-      
+      callbackUrl: paymentMethod === "cash" ? "/allorders" : data.session?.url,
     };
   } catch (error) {
     return {
@@ -114,7 +111,8 @@ export async function getUserOrders() {
     return {
       data: null,
       success: false,
-      message: (error as string) || "Something went wrong while fetching orders",
+      message:
+        (error as string) || "Something went wrong while fetching orders",
     };
   }
 }
