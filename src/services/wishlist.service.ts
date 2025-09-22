@@ -29,7 +29,6 @@ export async function getUserWishlist() {
       message: data.message || "Wishlist fetched successfully",
     };
   } catch (error) {
-    console.log(error);
     return {
       data: null,
       success: false,
@@ -67,7 +66,6 @@ export async function removeFromWishlist(productId: string) {
       message: data.message || "Removed from wishlist successfully",
     };
   } catch (error) {
-    console.log(error);
 
     return {
       data: null,
@@ -114,7 +112,6 @@ export async function addToWishlist(productId: string) {
       message: data.message || "Product added to wishlist successfully",
     };
   } catch (error) {
-    console.log(error);
 
     return {
       data: null,

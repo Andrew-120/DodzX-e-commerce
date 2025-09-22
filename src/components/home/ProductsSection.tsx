@@ -8,7 +8,6 @@ import ProductItem from '../products/ProductItem';
 
 export default async function ProductsSection() {
   const { data: products }: { data: IProduct[] } = await getProducts(8);
-  console.log(products);
     
   return (
     <section className='mb-20'>

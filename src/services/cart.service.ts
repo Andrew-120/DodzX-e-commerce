@@ -30,7 +30,6 @@ export async function getUserCart() {
       message: data.message || "Cart fetched successfully",
     };
   } catch (error) {
-    console.log(error);
     return {
       data: null,
       success: false,
@@ -67,7 +66,6 @@ export async function removeUserCart() {
       message: data.message || "Cart removed successfully",
     };
   } catch (error) {
-    console.log(error);
     return {
       data: null,
       success: false,
@@ -113,7 +111,6 @@ export async function addToCart(productId: string) {
       message: data.message || "Product added to cart successfully",
     };
   } catch (error) {
-    console.log(error);
 
     return {
       data: null,
@@ -152,7 +149,6 @@ export async function removeFromCart(productId: string) {
       message: data.message || "Removed from cart successfully",
     };
   } catch (error) {
-    console.log(error);
 
     return {
       data: null,
@@ -192,7 +188,6 @@ export async function updateQtyProductCart(productId: string, count: number) {
       message: data.message || "Updated quantity in cart successfully",
     };
   } catch (error) {
-    console.log(error);
 
     return {
       data: null,

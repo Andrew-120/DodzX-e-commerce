@@ -12,7 +12,6 @@ export async function getProducts(limit = 40) {
             return data;
 
         } catch (error) {
-            console.log(error);
             return {error: error as string};
     }
 
@@ -34,7 +33,6 @@ export async function getProductsDetails(id: string) {
             return data;
 
         } catch (error) {
-            console.log(error);
             return {error: error as string};
     }
 

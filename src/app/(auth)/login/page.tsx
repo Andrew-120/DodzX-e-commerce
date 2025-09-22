@@ -39,7 +39,6 @@ export default function LoginPage() {
           callbackUrl: "/",
         });
 
-        console.log(res);
 
         if (res?.ok) {
           toast.success("Login successful", {
@@ -53,7 +52,6 @@ export default function LoginPage() {
           });
         }
       } catch (error) {
-        console.log(error);
       }
     });
   }
