@@ -17,14 +17,15 @@ import Link from "next/link";
 import { toast } from "sonner";
 
 export default function WishlistPage() {
-  const { wishlistDetails, setWishlistDetails } = useWishlist();
+  const { wishlistDetails, getWishlistDetails } = useWishlist();
 
   async function removeProductFromWishlist(productId: string) {
     const res = await removeFromWishlist(productId);
 
     if (res.success) {
       toast.success(res.message, { position: "top-center" });
-      setWishlistDetails(res.data);
+      await getWishlistDetails();
+
     } else {
       toast.error(res.message || "Failed to remove product", {
         position: "top-center",

@@ -22,15 +22,16 @@ import Link from "next/link";
 import { toast } from "sonner";
 
 export default function CartPage() {
-  const { cartDetails, setCartDetails } = useCart();
+  const { cartDetails, getCartDetails } = useCart();
 
+  
   async function removeCartItems() {
     const res = await removeUserCart();
-    if (res?.message === "success") {
-      toast.success("Cart removed successfully", { position: "top-center" });
-      setCartDetails(null);
+    if (res.success) {
+      toast.success(res.message, { position: "top-center" });
+      await getCartDetails(); 
     } else {
-      toast.error(res?.message || "Failed to remove cart", {
+      toast.error(res.message || "Failed to remove cart", {
         position: "top-center",
       });
     }
@@ -38,13 +39,11 @@ export default function CartPage() {
 
   async function removeProductFromCart(productId: string) {
     const res = await removeFromCart(productId);
-    if (res?.message === "success") {
-      toast.success("Product removed from cart successfully", {
-        position: "top-center",
-      });
-      setCartDetails(res.data);
+    if (res.success) {
+      toast.success(res.message, { position: "top-center" });
+      await getCartDetails(); 
     } else {
-      toast.error(res?.message || "Failed to remove product from cart", {
+      toast.error(res.message || "Failed to remove product from cart", {
         position: "top-center",
       });
     }
@@ -52,14 +51,13 @@ export default function CartPage() {
 
 
   async function updateQuantityProductCart(productId: string, count: number) {
+ 
     const res = await updateQtyProductCart(productId, count);
-    if (res?.message === "success") {
-      toast.success("Product quantity updated successfully", {
-        position: "top-center",
-      });
-      setCartDetails(res.data);
+    if (res.success) {
+      toast.success(res.message, { position: "top-center" });
+      await getCartDetails(); 
     } else {
-      toast.error(res?.message || "Failed to update product quantity", {
+      toast.error(res.message || "Failed to update product quantity", {
         position: "top-center",
       });
     }
@@ -90,7 +88,7 @@ export default function CartPage() {
                               removeProductFromCart(product.product._id)
                             }
                             variant={"destructive"}
-                            className="absolute -top-0.5 -start-0.5 h-5 min-w-5 rounded-full"
+                            className="absolute -top-0.5 -start-0.5 h-5 min-w-5 rounded-full cursor-pointer"
                           >
                             <X />
                           </Badge>
@@ -108,7 +106,8 @@ export default function CartPage() {
                       <TableCell>
                         <div className="flex items-center gap-2">
                           <Button
-                            variant="outline" size={"sm"}
+                            variant="outline"
+                            size={"sm"}
                             onClick={() =>
                               updateQuantityProductCart(
                                 product.product._id,
@@ -122,7 +121,8 @@ export default function CartPage() {
                           {product.count}
 
                           <Button
-                            variant="outline" size={"sm"}
+                            variant="outline"
+                            size={"sm"}
                             onClick={() =>
                               updateQuantityProductCart(
                                 product.product._id,
@@ -153,6 +153,7 @@ export default function CartPage() {
               </div>
             </section>
 
+           
             <section className="flex justify-between">
               <div className="flex items-center gap-4 w-5/12">
                 <Input placeholder="Coupon Code" />
@@ -161,7 +162,7 @@ export default function CartPage() {
 
               <div className="w-5/12 py-8 px-6 border border-gray-950">
                 <h3 className="font-bold text-xl mb-6">Cart Total</h3>
-                <ul className="divider-y divider-gray-950">
+                <ul className="divide-y divide-gray-950">
                   <li className="py-6 flex justify-between">
                     <span>Subtotal:</span>
                     <span>{cartDetails.data.totalCartPrice}</span>
@@ -172,13 +173,15 @@ export default function CartPage() {
                   </li>
 
                   <li className="py-6 flex justify-between">
-                    <span>Total:</span> <span>100 EGP</span>
+                    <span>Total:</span>
+                    <span>{cartDetails.data.totalCartPrice}</span>
                   </li>
                 </ul>
 
                 <div className="flex justify-center">
                   <Button variant={"destructive"} asChild>
-                    <Link href="/checkout">Proceed to Checkout </Link></Button>
+                    <Link href="/checkout">Proceed to Checkout</Link>
+                  </Button>
                 </div>
               </div>
             </section>
